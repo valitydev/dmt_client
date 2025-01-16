@@ -4,6 +4,7 @@
 
 -export([commit/4]).
 -export([checkout_object/3]).
+-export([get_last_version/1]).
 
 -spec commit(
     dmt_client:vsn(),
@@ -19,6 +20,10 @@ commit(Version, Commit, UserOpID, Opts) ->
     dmt_client:versioned_object() | no_return().
 checkout_object(ObjectReference, VersionRef, Opts) ->
     call('RepositoryClient', 'CheckoutObject', {VersionRef, ObjectReference}, Opts).
+
+-spec get_last_version(dmt_client:opts()) -> number() | no_return().
+get_last_version(Opts) ->
+    call('RepositoryClient', 'GetLatestGlobalVersion', {}, Opts).
 
 call(ServiceName, Function, Args, Opts) ->
     Url = get_service_url(ServiceName),

@@ -12,6 +12,7 @@
 -export([checkout_object/3]).
 -export([commit/3]).
 -export([commit/4]).
+-export([get_last_version/0]).
 
 % UserOpManagement API
 
@@ -89,6 +90,10 @@ commit(Version, Commit, UserOpID) ->
 -spec commit(base_version(), commit(), user_op_id(), opts()) -> commit_response() | no_return().
 commit(Version, Commit, UserOpID, Opts) ->
     dmt_client_backend:commit(Version, Commit, UserOpID, Opts).
+
+-spec get_last_version() -> number() | no_return().
+get_last_version() ->
+    dmt_client_backend:get_last_version(#{}).
 
 % UserOpManagement
 

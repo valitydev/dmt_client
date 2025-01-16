@@ -2,6 +2,7 @@
 
 -export([commit/4]).
 -export([checkout_object/3]).
+-export([get_last_version/1]).
 
 %%% Behaviour callbacks
 
@@ -30,6 +31,10 @@ commit(Version, Commit, UserOpID, Opts) ->
     dmt_client:versioned_object() | no_return().
 checkout_object(ObjectReference, VersionReference, Opts) ->
     call(checkout_object, [ObjectReference, VersionReference, Opts]).
+
+-spec get_last_version(dmt_client:opts()) -> number() | no_return().
+get_last_version(Opts) ->
+    call(get_last_version, [Opts]).
 
 %%% Internal functions
 
